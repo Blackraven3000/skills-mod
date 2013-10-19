@@ -14,17 +14,14 @@ public class SkillRegistry {
 	 *  - have to use a HashMap for base registry.
 	 */
 	static HashMap<String, Class<? extends Skill>> skills = new HashMap();
+	static BiMap<String, Settings> settings = HashBiMap.create();
 	
-	public static void register(String name, Skill skill) {
-		FMLLog.info("REGISTERING " + name + " @ " + skill.getClass(), ModBase.instance);
-		skills.put(name, skill.getClass());
+	public static void register(Skill skill) {
+		
+		register(skill, new Settings(skill.getName()));
 	}
 	
-	public static void post() {
+	public static void register(Skill skill, Settings settings) {
 		
-		FMLLog.info("SKILLS REGISTERED (" + skills.size() + ")", ModBase.instance);
-		for (String skill : skills.keySet()) {
-			FMLLog.info("SKILL " + skill + " - " + skills.get(skill), ModBase.instance);
-		}
 	}
 }
