@@ -22,8 +22,10 @@ public class Gui implements IGuiHandler {
 
 		case 0: {
 
-			if (Minecraft.getMinecraft().currentScreen instanceof SkillGui)
+			if (Minecraft.getMinecraft().currentScreen instanceof SkillGui) {
 				player.closeScreen();
+				return null;
+			}
 
 			return new SkillGui(player);
 		}
