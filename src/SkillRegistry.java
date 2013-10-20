@@ -27,7 +27,7 @@ public class SkillRegistry {
 	}
 
 	public static void register(Skill skill, Settings settings) {
-
+		skills.put(skill.getName(), skill.getClass());
 	}
 
 	public static List<String> getSkillNames() {

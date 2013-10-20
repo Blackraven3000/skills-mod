@@ -30,6 +30,9 @@ public class ModBase {
 		public static final String VERSION = "0.0.0.6";
 		public static final String CHANNEL = ID;
 	}
+	
+	static final Skill mySkill = new Skill().setName("TEST");
+	static final Skill mySkillB = new Skill().setName("TEST Beta");
 
 	@Instance
 	public static ModBase instance;
@@ -50,11 +53,15 @@ public class ModBase {
 
 		MinecraftForge.EVENT_BUS.register(new EventSubs());
 		NetworkRegistry.instance().registerGuiHandler(this, new deity.skills.handlers.Gui());
+		
+		SkillRegistry.register(mySkill);
+		SkillRegistry.register(mySkillB);
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		
 		proxy.postInit(event);
+		FMLLog.info("SKILLS REGISTERED: " + SkillRegistry.skillCount(), this);
 	}
 }
