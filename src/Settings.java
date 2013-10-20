@@ -27,6 +27,7 @@ public class Settings {
 	}
 
 	public void genLevelAtTable() {
+		
 		// LLD = Last Level Difference
 		// LDD = Last Difference Difference
 		double LLD = 0, LDD = 0;

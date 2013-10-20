@@ -17,7 +17,7 @@ public abstract class Packet {
 	private static BiMap<Integer, Class<? extends Packet>> packets;
 
 	static {
-		ImmutableBiMap.Builder<Integer, Class<? extends Packet>> builder = ImmutableBiMap .builder();
+		ImmutableBiMap.Builder<Integer, Class<? extends Packet>> builder = ImmutableBiMap.builder();
 
 		builder.put(Integer.valueOf(0), RequestSkillGuiPacket.class);
 		builder.put(Integer.valueOf(1), RequestSkillUpdatePacket.class);

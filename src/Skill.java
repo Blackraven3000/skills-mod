@@ -25,6 +25,7 @@ public class Skill {
 	}
 	
 	public Skill setEnabled(boolean abled) {
+		
 		settingsSaftey();
 		settings.enabled = abled;
 		return this;
