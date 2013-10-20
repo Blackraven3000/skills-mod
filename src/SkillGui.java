@@ -12,13 +12,20 @@ import net.minecraft.util.ResourceLocation;
 
 public class SkillGui extends GuiScreen {
 
-	int exitPosX = 0; // set in init because of width
-	int exitPosY = 20;
-	int exitSize = 16;
+	static final ResourceLocation resource = new ResourceLocation(ModBase.Info.ID.toLowerCase(), "textures/gui/skillgui.png");
+
+	int tabWidth = 128, tabHeight = 32;
+
+	int exitPosX = 0, exitPosY = 2;
+	int prevPagePosX = 0, prevPagePosY = 0;
+	int nextPagePosX = 0, nextPagePosY = 0;
+
+	int tabRows = 0, tabColumns = 0;
+	int tabXSpace = 0, tabYSpace = 0;
 
 	GuiButton exit = new GuiButton(0, 0, 0, "exit");
-
-	static final ResourceLocation resource = new ResourceLocation(ModBase.Info.ID.toLowerCase(), "textures/gui/skillgui.png");
+	GuiButton nextPage = new GuiButton(1, 0, 0, "next page");
+	GuiButton prevPage = new GuiButton(2, 0, 0, "prev page");
 
 	EntityPlayer player;
 
@@ -30,9 +37,16 @@ public class SkillGui extends GuiScreen {
 
 	@Override
 	public void initGui() {
-		
-		exitPosX = this.width - 40;
 
+		exitPosX = this.width - 18;
+
+		tabRows = (int) (this.width / tabWidth);
+		tabColumns = (int) (this.height / tabHeight) - 1;
+
+		tabXSpace = (int) (this.width - (tabRows * tabWidth)) / tabRows;
+		tabYSpace = (int) (this.height - ((tabColumns + 1) * tabHeight)) / (tabColumns + 1);
+		
+		FMLLog.info(" SKILL TABS [" + tabRows + "x" + tabColumns + "]", this);
 	}
 
 	@Override
@@ -46,15 +60,39 @@ public class SkillGui extends GuiScreen {
 		this.drawDefaultBackground();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(resource);
-		this.drawTexturedModalRect(exitPosX, exitPosY, 0, 24, exitSize, exitSize);
+		this.drawTexturedModalRect(exitPosX, exitPosY, tabWidth + 16, 0, 16, 16);
 
-		int id = 1;
+		int tabX = 1, tabY = 1;
 		for (String skill : SkillRegistry.getSkillNames()) {
 
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			mc.renderEngine.bindTexture(resource);
-			this.drawTexturedModalRect(20 * id, 20 * id, 0, 0, 144, 24);
-			id++;
+			if (tabY <= tabColumns)
+			{				
+				int xDiff = ((tabX - 1) * tabWidth) + ((tabX - 1) * tabXSpace);
+				int yDiff = ((tabY - 1) * tabHeight) + ((tabY - 1) * tabYSpace);
+
+				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.renderEngine.bindTexture(resource);
+				
+				//background
+				this.drawTexturedModalRect((tabXSpace / 2) + xDiff, 20 + yDiff, 0, 0, tabWidth, tabHeight);
+				
+				//icon
+				
+				//name
+				this.fontRenderer.drawString(skill, (tabXSpace / 2) + xDiff + 29, 20 + yDiff + 8, 0xFFFF55);
+				
+				//level
+				
+				//exp
+				
+				tabX++;
+
+				if (tabX > tabRows)
+				{
+					tabX = 1;
+					tabY++;
+				}
+			}
 		}
 
 		super.drawScreen(x, y, f);
@@ -72,8 +110,8 @@ public class SkillGui extends GuiScreen {
 
 		if (par3 == 0) {
 
-			if (par1 >= exitPosX && par1 <= exitPosX + exitSize && par2 >= exitPosY && par2 <= exitPosY + exitSize) {
-				
+			if (par1 >= exitPosX && par1 <= exitPosX + 16 && par2 >= exitPosY && par2 <= exitPosY + 16) {
+
 				this.mc.sndManager.playSoundFX("random.click", 1.0F, 1.0F);
 				this.actionPerformed(exit);
 			}
@@ -81,10 +119,10 @@ public class SkillGui extends GuiScreen {
 	}
 
 	protected void actionPerformed(GuiButton guibutton) {
-		
+
 		// id is the id you give your button
 		switch (guibutton.id) {
-		
+
 		default:
 		case 0:
 			mc.thePlayer.closeScreen();

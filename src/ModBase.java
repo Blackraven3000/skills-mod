@@ -31,8 +31,26 @@ public class ModBase {
 		public static final String CHANNEL = ID;
 	}
 	
-	static final Skill mySkill = new Skill().setName("TEST");
-	static final Skill mySkillB = new Skill().setName("TEST Beta");
+	static final Skill mySkill00 = new Skill().setName("00");
+	static final Skill mySkill01 = new Skill().setName("01");
+	static final Skill mySkill02 = new Skill().setName("02");
+	static final Skill mySkill03 = new Skill().setName("03");
+	static final Skill mySkill04 = new Skill().setName("04");
+	static final Skill mySkill05 = new Skill().setName("05");
+	static final Skill mySkill06 = new Skill().setName("06");
+	static final Skill mySkill07 = new Skill().setName("07");
+	static final Skill mySkill08 = new Skill().setName("08");
+	static final Skill mySkill09 = new Skill().setName("09");
+	static final Skill mySkill0A = new Skill().setName("0A");
+	static final Skill mySkill0B = new Skill().setName("0B");
+	static final Skill mySkill0C = new Skill().setName("0C");
+	static final Skill mySkill0D = new Skill().setName("0D");
+	static final Skill mySkill0E = new Skill().setName("0E");
+	static final Skill mySkill0F = new Skill().setName("0F");
+	static final Skill mySkill10 = new Skill().setName("10");
+	static final Skill mySkill11 = new Skill().setName("11");
+	static final Skill mySkill12 = new Skill().setName("12");
+	static final Skill mySkill13 = new Skill().setName("13");
 
 	@Instance
 	public static ModBase instance;
@@ -54,8 +72,26 @@ public class ModBase {
 		MinecraftForge.EVENT_BUS.register(new EventSubs());
 		NetworkRegistry.instance().registerGuiHandler(this, new deity.skills.handlers.Gui());
 		
-		SkillRegistry.register(mySkill);
-		SkillRegistry.register(mySkillB);
+		SkillRegistry.register(mySkill00);
+		SkillRegistry.register(mySkill01);
+		SkillRegistry.register(mySkill02);
+		SkillRegistry.register(mySkill03);
+		SkillRegistry.register(mySkill04);
+		SkillRegistry.register(mySkill05);
+		SkillRegistry.register(mySkill06);
+		SkillRegistry.register(mySkill07);
+		SkillRegistry.register(mySkill08);
+		SkillRegistry.register(mySkill09);
+		SkillRegistry.register(mySkill0A);
+		SkillRegistry.register(mySkill0B);
+		SkillRegistry.register(mySkill0C);
+		SkillRegistry.register(mySkill0D);
+		SkillRegistry.register(mySkill0E);
+		SkillRegistry.register(mySkill0F);
+		SkillRegistry.register(mySkill10);
+		SkillRegistry.register(mySkill11);
+		SkillRegistry.register(mySkill12);
+		SkillRegistry.register(mySkill13);
 	}
 
 	@EventHandler
