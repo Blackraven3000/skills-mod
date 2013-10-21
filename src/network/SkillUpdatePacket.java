@@ -43,13 +43,19 @@ public class SkillUpdatePacket extends Packet {
 			out.writeInt((int) 1);
 			
 			out.writeUTF(skillName);
+			Skill skill = Skill.getSkill(skillOwner, skillName);
+			
+			out.writeUTF(skill.getIcon());
 			
 		} else {
 
 			out.writeInt(SkillRegistry.skillCount());
-			for (String skill : SkillRegistry.getSkillNames()) {
+			for (String name : SkillRegistry.getSkillNames()) {
 				
-				out.writeUTF(skill);
+				out.writeUTF(name);
+				Skill skill = Skill.getSkill(skillOwner, name);
+				
+				out.writeUTF(skill.getIcon());
 				
 			}
 		}
@@ -66,7 +72,9 @@ public class SkillUpdatePacket extends Packet {
 		for (int i = 0; i < total; i++) {
 			
 			String name = in.readUTF();
-
+			Skill skill = Skill.getSkill(skillOwner, name);
+			
+			skill.setIcon(in.readUTF());
 		}
 	}
 

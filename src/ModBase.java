@@ -31,26 +31,26 @@ public class ModBase {
 		public static final String CHANNEL = ID;
 	}
 	
-	static final Skill mySkill00 = new Skill().setName("00");
-	static final Skill mySkill01 = new Skill().setName("01");
-	static final Skill mySkill02 = new Skill().setName("02");
-	static final Skill mySkill03 = new Skill().setName("03");
-	static final Skill mySkill04 = new Skill().setName("04");
-	static final Skill mySkill05 = new Skill().setName("05");
-	static final Skill mySkill06 = new Skill().setName("06");
-	static final Skill mySkill07 = new Skill().setName("07");
-	static final Skill mySkill08 = new Skill().setName("08");
-	static final Skill mySkill09 = new Skill().setName("09");
-	static final Skill mySkill0A = new Skill().setName("0A");
-	static final Skill mySkill0B = new Skill().setName("0B");
-	static final Skill mySkill0C = new Skill().setName("0C");
-	static final Skill mySkill0D = new Skill().setName("0D");
-	static final Skill mySkill0E = new Skill().setName("0E");
-	static final Skill mySkill0F = new Skill().setName("0F");
-	static final Skill mySkill10 = new Skill().setName("10");
-	static final Skill mySkill11 = new Skill().setName("11");
-	static final Skill mySkill12 = new Skill().setName("12");
-	static final Skill mySkill13 = new Skill().setName("13");
+	static final Skill mySkill00 = new Skill().setName("Alchemy");
+	static final Skill mySkill01 = new Skill().setName("Tailoring");
+	static final Skill mySkill02 = new Skill().setName("Fishing");
+	static final Skill mySkill03 = new Skill().setName("Blacksmithing");
+	static final Skill mySkill04 = new Skill().setName("Mining");
+	static final Skill mySkill05 = new Skill().setName("Cooking");
+	static final Skill mySkill06 = new Skill().setName("Crafting");
+	static final Skill mySkill07 = new Skill().setName("Attack");
+	static final Skill mySkill08 = new Skill().setName("Defence");
+	static final Skill mySkill09 = new Skill().setName("Lumberjacking");
+	static final Skill mySkill0A = new Skill().setName("Agility");
+	static final Skill mySkill0B = new Skill().setName("Farming");
+	static final Skill mySkill0C = new Skill().setName("Magic");
+	static final Skill mySkill0D = new Skill().setName("Summoning");
+	static final Skill mySkill0E = new Skill().setName("Construction");
+	static final Skill mySkill0F = new Skill().setName("Archery");
+	static final Skill mySkill10 = new Skill().setName("Fletching");
+	static final Skill mySkill11 = new Skill().setName("Enchanting");
+	static final Skill mySkill12 = new Skill().setName("Riding");
+	static final Skill mySkill13 = new Skill().setName("Something Random");
 
 	@Instance
 	public static ModBase instance;

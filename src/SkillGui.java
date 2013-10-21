@@ -7,6 +7,7 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import deity.skills.network.RequestSkillUpdatePacket;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -60,10 +61,12 @@ public class SkillGui extends GuiScreen {
 		this.drawDefaultBackground();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(resource);
-		this.drawTexturedModalRect(exitPosX, exitPosY, tabWidth + 16, 0, 16, 16);
+		
+		//exit button
+		this.drawTexturedModalRect(exitPosX, exitPosY, tabWidth, 16, 16, 16);
 
 		int tabX = 1, tabY = 1;
-		for (String skill : SkillRegistry.getSkillNames()) {
+		for (String name : SkillRegistry.getSkillNames()) {
 
 			if (tabY <= tabColumns)
 			{				
@@ -73,17 +76,25 @@ public class SkillGui extends GuiScreen {
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.renderEngine.bindTexture(resource);
 				
+				Skill skill = Skill.getSkill(player, name);
+				
 				//background
 				this.drawTexturedModalRect((tabXSpace / 2) + xDiff, 20 + yDiff, 0, 0, tabWidth, tabHeight);
 				
 				//icon
+				mc.renderEngine.bindTexture(new ResourceLocation(skill.getIcon()));
+				drawTexture((tabXSpace / 2) + xDiff + 8, 20 + yDiff + 8, 16, 16);
 				
 				//name
-				this.fontRenderer.drawString(skill, (tabXSpace / 2) + xDiff + 29, 20 + yDiff + 8, 0xFFFF55);
+				this.fontRenderer.drawString(skill.getName(), (tabXSpace / 2) + xDiff + 8, 18 + yDiff, 0xFFFF55);
 				
 				//level
+				this.fontRenderer.drawString("999 / 999", (tabXSpace / 2) + xDiff + 30, 20 + yDiff + 9, 0xFFFFFF);
 				
 				//exp
+				//this.fontRenderer.drawString("999,999,999", (tabXSpace / 2) + xDiff + 29, 20 + yDiff + 19, 0xFFFFFF);
+				mc.renderEngine.bindTexture(resource);
+				this.drawTexturedModalRect( (tabXSpace / 2) + xDiff + 29,  20 + yDiff + 19, tabWidth, 0, 93, 8);
 				
 				tabX++;
 
@@ -96,6 +107,18 @@ public class SkillGui extends GuiScreen {
 		}
 
 		super.drawScreen(x, y, f);
+	}
+	
+	public void drawTexture(int x, int y, int w, int h)
+	{
+	    GL11.glColor4f(1F, 1F, 1F, 1F);
+	    Tessellator tessellator = Tessellator.instance;
+	    tessellator.startDrawingQuads();
+	    tessellator.addVertexWithUV(x + 0, y + h, this.zLevel, 0D, 1D);
+	    tessellator.addVertexWithUV(x + w, y + h, this.zLevel, 1D, 1D);
+	    tessellator.addVertexWithUV(x + w, y + 0, this.zLevel, 1D, 0D);
+	    tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, 0D, 0D);
+	    tessellator.draw();
 	}
 
 	@Override

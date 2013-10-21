@@ -2,13 +2,13 @@ package deity.skills;
 
 import java.util.Locale;
 
-import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 
 public class Settings {
 
 	protected boolean enabled = true;
 
-	protected Icon skillIcon;
+	protected String Icon;
 
 	protected final String skillName;
 
@@ -24,9 +24,11 @@ public class Settings {
 	public Settings(String name) {
 
 		this.skillName = name.toLowerCase(Locale.ENGLISH);
+		Icon = "textures/items/book_enchanted.png";
+		genLevelAtTable();
 	}
 
-	public void genLevelAtTable() {
+	protected void genLevelAtTable() {
 		
 		// LLD = Last Level Difference
 		// LDD = Last Difference Difference

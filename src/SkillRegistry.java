@@ -3,6 +3,9 @@ package deity.skills;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
+
+import net.minecraft.entity.player.EntityPlayer;
 
 import com.google.common.collect.HashBiMap;
 
@@ -10,10 +13,6 @@ import cpw.mods.fml.common.FMLLog;
 
 public class SkillRegistry {
 
-	/*
-	 * BiMap Values cannot be the same or it will crash have to use a HashMap
-	 * for base registry.
-	 */
 	static HashMap<String, Class<? extends Skill>> skills = new HashMap();
 	static HashMap<String, Settings> settings = new HashMap();
 
@@ -25,9 +24,42 @@ public class SkillRegistry {
 
 		register(skill, new Settings(skill.getName()));
 	}
+	
+	public static void register(Skill skill, Settings sets) {
+		
+		if (skills.containsKey(skill)) {
+			//error
+			return;
+		}
 
-	public static void register(Skill skill, Settings settings) {
-		skills.put(skill.getName(), skill.getClass());
+		skills.put(skill.getName().toLowerCase(), skill.getClass());
+		
+		if (settings.containsKey(skill.getName().toLowerCase())) {
+			//error
+			return;
+		}
+		
+		settings.put(skill.getName().toLowerCase(), sets);			
+	}
+
+	public static void registerPlayerSkills(EntityPlayer player) {
+
+		for (String name : getSkillNames()) {
+
+			if (Skill.getSkill(player, name) != null)
+				continue;
+
+			try {
+				
+				Skill instance = skills.get(name).newInstance().setName(name).setOwner(player);
+				player.registerExtendedProperties(ModBase.Info.ID + name, instance);
+				
+			} catch (InstantiationException e) {
+				FMLLog.severe(e.toString(), ModBase.instance);
+			} catch (IllegalAccessException e) {
+				FMLLog.severe(e.toString(), ModBase.instance);
+			}
+		}
 	}
 
 	public static List<String> getSkillNames() {
